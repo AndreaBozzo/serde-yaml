@@ -1,16 +1,21 @@
 Serde YAML
 ==========
 
-[<img alt="github" src="https://img.shields.io/badge/github-dtolnay/serde--yaml-8da0cb?style=for-the-badge&labelColor=555555&logo=github" height="20">](https://github.com/dtolnay/serde-yaml)
-[<img alt="crates.io" src="https://img.shields.io/crates/v/serde_yaml.svg?style=for-the-badge&color=fc8d62&logo=rust" height="20">](https://crates.io/crates/serde_yaml)
-[<img alt="docs.rs" src="https://img.shields.io/badge/docs.rs-serde__yaml-66c2a5?style=for-the-badge&labelColor=555555&logo=docs.rs" height="20">](https://docs.rs/serde_yaml)
-[<img alt="build status" src="https://img.shields.io/github/actions/workflow/status/dtolnay/serde-yaml/ci.yml?branch=master&style=for-the-badge" height="20">](https://github.com/dtolnay/serde-yaml/actions?query=branch%3Amaster)
+[<img alt="github" src="https://img.shields.io/badge/github-AndreaBozzo/serde--yaml-8da0cb?style=for-the-badge&labelColor=555555&logo=github" height="20">](https://github.com/AndreaBozzo/serde-yaml)
+[<img alt="build status" src="https://img.shields.io/github/actions/workflow/status/AndreaBozzo/serde-yaml/ci.yml?branch=master&style=for-the-badge" height="20">](https://github.com/AndreaBozzo/serde-yaml/actions?query=branch%3Amaster)
 
 Rust library for using the [Serde] serialization framework with data in [YAML]
-file format. _(This project is no longer maintained.)_
+file format.
 
 [Serde]: https://github.com/serde-rs/serde
 [YAML]: https://yaml.org/
+
+## About this fork
+
+This is a personal fork of the original [serde-yaml](https://github.com/dtolnay/serde-yaml) by David Tolnay, forked from commit [`2009506`](https://github.com/dtolnay/serde-yaml/commit/2009506) (Release 0.9.34). The original repository was archived and is no longer maintained.
+
+This fork aims to provide continued maintenance with minimal, focused changes.
+
 
 ## Dependency
 
@@ -22,7 +27,7 @@ serde_yaml = "0.9"
 
 Release notes are available under [GitHub releases].
 
-[GitHub releases]: https://github.com/dtolnay/serde-yaml/releases
+[GitHub releases]: https://github.com/AndreaBozzo/serde-yaml/releases
 
 ## Using Serde YAML
 

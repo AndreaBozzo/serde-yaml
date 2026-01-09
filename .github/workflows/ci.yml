@@ -4,7 +4,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-  schedule: [cron: "40 1 * * *"]
 
 permissions:
   contents: read
@@ -13,13 +12,8 @@ env:
   RUSTFLAGS: -Dwarnings
 
 jobs:
-  pre_ci:
-    uses: dtolnay/.github/.github/workflows/pre_ci.yml@master
-
   test:
     name: Rust ${{matrix.rust}}
-    needs: pre_ci
-    if: needs.pre_ci.outputs.continue
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -39,8 +33,6 @@ jobs:
 
   doc:
     name: Documentation
-    needs: pre_ci
-    if: needs.pre_ci.outputs.continue
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
@@ -63,8 +55,6 @@ jobs:
 
   miri:
     name: Miri
-    needs: pre_ci
-    if: needs.pre_ci.outputs.continue
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -77,8 +67,6 @@ jobs:
 
   minimal:
     name: Minimal versions
-    needs: pre_ci
-    if: needs.pre_ci.outputs.continue
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -86,26 +74,3 @@ jobs:
       - uses: dtolnay/rust-toolchain@nightly
       - run: cargo generate-lockfile -Z minimal-versions
       - run: cargo check --locked
-
-  fuzz:
-    name: Fuzz
-    needs: pre_ci
-    if: needs.pre_ci.outputs.continue
-    runs-on: ubuntu-latest
-    timeout-minutes: 45
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@nightly
-      - uses: dtolnay/install@cargo-fuzz
-      - run: cargo fuzz check
-
-  outdated:
-    name: Outdated
-    runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
-    timeout-minutes: 45
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/install@cargo-outdated
-      - run: cargo outdated --workspace --exit-code 1
-      - run: cargo outdated --manifest-path fuzz/Cargo.toml --exit-code 1
