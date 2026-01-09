@@ -17,30 +17,32 @@ pub(crate) struct Error {
 
 impl Error {
     pub unsafe fn parse_error(parser: *const sys::yaml_parser_t) -> Self {
+        let parser = unsafe { &*parser };
         Error {
-            kind: unsafe { (*parser).error },
-            problem: match NonNull::new(unsafe { (*parser).problem as *mut _ }) {
+            kind: parser.error,
+            problem: match NonNull::new(parser.problem as *mut _) {
                 Some(problem) => unsafe { CStr::from_ptr(problem) },
                 None => CStr::from_bytes_with_nul(b"libyaml parser failed but there is no error\0"),
             },
-            problem_offset: unsafe { (*parser).problem_offset },
+            problem_offset: parser.problem_offset,
             problem_mark: Mark {
-                sys: unsafe { (*parser).problem_mark },
+                sys: parser.problem_mark,
             },
-            context: match NonNull::new(unsafe { (*parser).context as *mut _ }) {
+            context: match NonNull::new(parser.context as *mut _) {
                 Some(context) => Some(unsafe { CStr::from_ptr(context) }),
                 None => None,
             },
             context_mark: Mark {
-                sys: unsafe { (*parser).context_mark },
+                sys: parser.context_mark,
             },
         }
     }
 
     pub unsafe fn emit_error(emitter: *const sys::yaml_emitter_t) -> Self {
+        let emitter = unsafe { &*emitter };
         Error {
-            kind: unsafe { (*emitter).error },
-            problem: match NonNull::new(unsafe { (*emitter).problem as *mut _ }) {
+            kind: emitter.error,
+            problem: match NonNull::new(emitter.problem as *mut _) {
                 Some(problem) => unsafe { CStr::from_ptr(problem) },
                 None => {
                     CStr::from_bytes_with_nul(b"libyaml emitter failed but there is no error\0")
