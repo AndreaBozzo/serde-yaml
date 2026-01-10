@@ -16,6 +16,12 @@ This is a personal fork of the original [serde-yaml](https://github.com/dtolnay/
 
 This fork aims to provide continued maintenance with minimal, focused changes.
 
+**Changes from original:**
+- Rust 1.82+ required (was 1.64)
+- `impl From<Error> for io::Error` for easier error handling
+- Resolved internal FIXMEs using stable APIs (`Box::new_uninit`)
+- Clippy fixes and removed unnecessary dev-dependencies
+
 
 ## Dependency
 

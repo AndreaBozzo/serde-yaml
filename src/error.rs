@@ -179,6 +179,19 @@ impl de::Error for Error {
     }
 }
 
+impl From<Error> for io::Error {
+    fn from(e: Error) -> Self {
+        if let ErrorImpl::Io(err) = *e.0 {
+            err
+        } else {
+            match *e.0 {
+                ErrorImpl::EndOfStream => io::Error::new(io::ErrorKind::UnexpectedEof, e),
+                _ => io::Error::new(io::ErrorKind::InvalidData, e),
+            }
+        }
+    }
+}
+
 impl ErrorImpl {
     fn location(&self) -> Option<Location> {
         self.mark().map(Location::from_mark)
