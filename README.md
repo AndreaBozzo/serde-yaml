@@ -21,6 +21,7 @@ This fork aims to provide continued maintenance with minimal, focused changes. I
 - `impl From<Error> for io::Error` for easier error handling
 - Resolved internal FIXMEs using stable APIs (`Box::new_uninit`)
 - Clippy fixes and removed unnecessary dev-dependencies
+- Simplified CI (fmt, clippy, test) — `clippy::pedantic` disabled as warnings are style-only (lifetime elision, `let...else` syntax) with no functional issues
 
 
 ## Dependency
