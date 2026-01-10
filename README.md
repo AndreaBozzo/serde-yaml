@@ -14,7 +14,7 @@ file format.
 
 This is a personal fork of the original [serde-yaml](https://github.com/dtolnay/serde-yaml) by David Tolnay, forked from commit [`2009506`](https://github.com/dtolnay/serde-yaml/commit/2009506) (Release 0.9.34). The original repository was archived and is no longer maintained.
 
-This fork aims to provide continued maintenance with minimal, focused changes.
+This fork aims to provide continued maintenance with minimal, focused changes. It ports improvements from [serde-yaml-ng](https://github.com/acatton/serde-yaml-ng), whose maintainer [works on his own terms](https://github.com/acatton/serde-yaml-ng#why) as a personal project. This fork exists as a parallel effort for my own use. 
 
 **Changes from original:**
 - Rust 1.82+ required (was 1.64)
